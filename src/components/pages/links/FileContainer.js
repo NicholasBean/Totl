@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import './Citations.css';
+import './FileContainer.css';
 
-export function Citations(props) {
+export default function Citations(props) {
     let [fileTitle, setFileTitle] = useState("Untitled");
     let [fileContent, setFileContent] = useState("There are no citations added. Please upload or create a citation.");
     const [file, setFile] = useState()
@@ -18,14 +18,21 @@ export function Citations(props) {
         }
         
         e.preventDefault()
-        const url = 'http://localhost:3000/citations';
+        const url = 'http://localhost:3000/';
         const formData = new FormData();
 
         formData.append('file', file);
-        axios.post(url, formData).then((response) => {
-            setFileTitle(response.data.file.name);
-            setFileContent(response.data.fileUrl);
-        }); 
+
+        axios({
+          method: 'post',
+          url: url,
+          data: { formData },
+        })
+        .then(response => {
+          setFileTitle(response.data.file.name)
+          setFileContent(response.data.file.fileContent)
+        })
+        .catch(error => console.log(error))
     }
 
     function handleBack() {
@@ -40,7 +47,20 @@ export function Citations(props) {
                     <p>{fileContent}</p> 
                 </pre>
             </div>
+            
             <input onChange={handleChange} type="file"/>
+
+            {file && (
+              <section>
+                File details:
+                <ul>
+                  <li>Name: {file.name}</li>
+                  <li>Type: {file.type}</li>
+                  <li>Size: {file.size} bytes</li>
+                </ul>
+              </section>
+            )}
+
             <div>
                 <button onClick={handleFileSubmit} type="submit">Upload citation</button>
                 <button onClick={handleBack} className="back-button">Back</button> 
