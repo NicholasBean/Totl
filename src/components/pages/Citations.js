@@ -3,10 +3,13 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import "./Citations.css"; // Import Citations.css for styling
 
-const Citations = () => {
+const Citations = () => { 
   const [bookInfo, setBookInfo] = useState(null);
   const [coverURL, setCoverURL] = useState('');
   const [chicagoBib, setChicagoBib] = useState('');
+  const [APACitation, setAPACitation] = useState('');
+  const [bibtexCitation, setBibtexCitation] = useState('');
+  const [mlaCitation, setMLACitation] = useState('');
   const [copyButtonText, setCopyButtonText] = useState('Copy'); // Track button text
   const location = useLocation();
 
@@ -67,20 +70,63 @@ const Citations = () => {
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(chicagoBib);
+  const generateAPACitation = () => {
+    if (bookInfo) {
+      const author = bookInfo.author_name ? bookInfo.author_name.join(', ') : 'N/A';
+      const title = bookInfo.title ? bookInfo.title : 'N/A';
+      const publishYear = bookInfo.first_publish_year ? bookInfo.first_publish_year : 'N/A';
+      const publisher = bookInfo.publisher ? bookInfo.publisher[0] : 'N/A';
+      const city = bookInfo.publish_place ? bookInfo.publish_place[0] : 'N/A';
+
+      let APACitationEntry = `${author} (${publishYear}). ${title}. ${city}: ${publisher}.`;
+      setAPACitation(APACitationEntry);
+    }
+  };
+
+  const generateBibTeX = () => {
+    if (bookInfo) {
+      const author = bookInfo.author_name ? bookInfo.author_name.join(' and ') : 'N/A';
+      const title = bookInfo.title ? bookInfo.title : 'N/A';
+      const publisher = bookInfo.publisher ? bookInfo.publisher[0] : 'N/A';
+      const year = bookInfo.first_publish_year ? bookInfo.first_publish_year : 'N/A';
+
+      let bibtexEntry = `@book{key,
+    author = {${author}},
+    title = {${title}},
+    publisher = {${publisher}},
+    year = {${year}},
+}`;
+      setBibtexCitation(bibtexEntry);
+    }
+  };
+
+  const generateMLACitation = () => {
+    if (bookInfo) {
+      const author = bookInfo.author_name ? bookInfo.author_name.join(', ') : 'N/A';
+      const title = bookInfo.title ? bookInfo.title : 'N/A';
+      const publisher = bookInfo.publisher ? bookInfo.publisher[0] : 'N/A';
+      const year = bookInfo.first_publish_year ? bookInfo.first_publish_year : 'N/A';
+
+      let mlaEntry = `${author}. *${title}*. ${publisher}, ${year}.`;
+      setMLACitation(mlaEntry);
+    }
+  };
+
+  const handleCopy = (citation) => {
+    navigator.clipboard.writeText(citation);
     setCopyButtonText('Copied'); // Change button text to "Copied" when clicked
   };
 
-  const handleDownload = () => {
+  const handleDownload = (citation, style) => {
     const element = document.createElement('a');
-    const file = new Blob([chicagoBib], {type: 'text/plain'});
+    const fileExtension = style === 'bibtex' ? 'bib' : 'txt'; // Set file extension based on citation style
+    const file = new Blob([citation], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = 'chicago_bibliography.txt';
+    element.download = `${style}_citation.${fileExtension}`; // Set the file extension accordingly
     document.body.appendChild(element);
     element.click();
   };
-
+  
   return (
     <div>
       <div className="header-container">
@@ -102,13 +148,43 @@ const Citations = () => {
                 <p>Publish Place: {bookInfo.publish_place ? bookInfo.publish_place[0] : 'N/A'}</p>
                 <p>Number of Pages: {bookInfo.number_of_pages_median ? bookInfo.number_of_pages_median : 'N/A'}</p>
                 <button className="chicago-cite-button" onClick={generateChicagoBib}>Chicago</button>
+                <button className="apa-cite-button" onClick={generateAPACitation}>APA</button>
+                <button className="mla-cite-button" onClick={generateMLACitation}>MLA</button>
+                <button className="bibtex-cite-button" onClick={generateBibTeX}>BibTeX</button>
                 {chicagoBib && (
                   <div>
                     <br />
                     <h3>Chicago Bibliography Entry</h3>
                     <p>{chicagoBib}</p>
-                    <button className="copy-button" onClick={handleCopy}>{copyButtonText}</button>
-                    <button className="download-button" onClick={handleDownload}>Download</button>
+                    <button className="copy-button" onClick={() => handleCopy(chicagoBib)}>{copyButtonText}</button>
+                    <button className="download-button" onClick={() => handleDownload(chicagoBib, 'chicago')}>Download</button>
+                  </div>
+                )}
+                {APACitation && (
+                  <div>
+                    <br />
+                    <h3>APA Citation</h3>
+                    <p>{APACitation}</p>
+                    <button className="copy-button" onClick={() => handleCopy(APACitation)}>{copyButtonText}</button>
+                    <button className="download-button" onClick={() => handleDownload(APACitation, 'apa')}>Download</button>
+                  </div>
+                )}
+                {mlaCitation && (
+                  <div>
+                    <br />
+                    <h3>MLA Citation</h3>
+                    <p>{mlaCitation}</p>
+                    <button className="copy-button" onClick={() => handleCopy(mlaCitation)}>{copyButtonText}</button>
+                    <button className="download-button" onClick={() => handleDownload(mlaCitation, 'mla')}>Download</button>
+                  </div>
+                )}
+                {bibtexCitation && (
+                  <div>
+                    <br />
+                    <h3>BibTeX Citation</h3>
+                    <p>{bibtexCitation}</p>
+                    <button className="copy-button" onClick={() => handleCopy(bibtexCitation)}>{copyButtonText}</button>
+                    <button className="download-button" onClick={() => handleDownload(bibtexCitation, 'bibtex')}>Download</button>
                   </div>
                 )}
               </div>
