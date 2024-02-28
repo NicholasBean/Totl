@@ -1,39 +1,53 @@
 import React, { useState } from "react";
-import axios from 'axios';
+//import axios from "axios";
 import './FileContainer.css';
 
-export default function Citations(props) {
-    let [fileTitle, setFileTitle] = useState("Untitled");
-    let [fileContent, setFileContent] = useState("There are no citations added. Please upload or create a citation.");
+
+/* UPLOAD THIS INTO THE POSTGRESQL DATABASE 
+  
+*/ 
+
+
+const Citations = (props) => {
+  
     const [file, setFile] = useState()
+    const [fileDataToJSON, setFileDataToJSON] = useState()
+
+    //let [fileTitle, setFileTitle] = useState("Untitled");
+    /*
+    let [fileContent, setFileContent] = useState("There are no citations added. Please upload or create a citation.");
+*/
+
+    function fileParser(file) { 
+      //we need to parse it 
+      //it needs to read book, website or other, 
+      //etc
+      JSON.stringify(file)
+    }
+
+    function convertToJson(data) { 
+      //turn into JSON
+    }
 
     function handleChange(e) {
-        setFile(e.target.files[0])
+        setFile(e.target.files[0])        
     }
 
     function handleFileSubmit(e) {
         if (!file) { 
+            e.preventDefault()
             console.log("No file selected.");
             return; 
         }
-        
         e.preventDefault()
-        const url = 'http://localhost:3000/';
-        const formData = new FormData();
 
-        formData.append('file', file);
+        /* Use fileParser, put into database */
+        console.log(file)
 
-        axios({
-          method: 'post',
-          url: url,
-          data: { formData },
-        })
-        .then(response => {
-          setFileTitle(response.data.file.name)
-          setFileContent(response.data.file.fileContent)
-        })
-        .catch(error => console.log(error))
-    }
+        const data = fileParser(file)
+        console.log(data)
+
+    } 
 
     function handleBack() {
         props.onBack(); // Call the onBack function passed from the parent component
@@ -41,12 +55,9 @@ export default function Citations(props) {
 
     return (
         <div className="file-popup">
-            <h2 className="file-title">{fileTitle}</h2>
-            <div className="files">
-                <pre>
-                    <p>{fileContent}</p> 
-                </pre>
-            </div>
+            <h2 className="file-title">Upload a Citation</h2>
+
+            {!file && <p>There are no citations added. Please upload or create a citation.</p>}
             
             <input onChange={handleChange} type="file"/>
 
@@ -61,10 +72,12 @@ export default function Citations(props) {
               </section>
             )}
 
-            <div>
-                <button onClick={handleFileSubmit} type="submit">Upload citation</button>
+            <form onSubmit={handleFileSubmit}>
+                <button type="submit">Upload Citation</button>
                 <button onClick={handleBack} className="back-button">Back</button> 
-            </div>
+            </form>
         </div>
     );
 }
+
+export default Citations;
