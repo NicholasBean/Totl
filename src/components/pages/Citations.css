@@ -47,6 +47,51 @@
   margin-top: 15px;
 }
 
+.apa-cite-button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: auto;
+  text-align: center; /* Center the text horizontally */
+  line-height: 20px;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.mla-cite-button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  line-height: 20px;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-left: 10px; /* Adjust margin-left to space out the button */
+}
+.bibtex-cite-button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  line-height: 20px;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-left: 10px; /* Adjust margin-left to space out the button */
+}
+
+
 /* Style for the Copy button */
 .copy-button {
   background-color: tomato; /* Same color as Chicago citation button */
