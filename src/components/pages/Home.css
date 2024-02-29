@@ -23,7 +23,8 @@
 }
 
 .home-cite-button,
-.home-upload-button {
+.home-upload-button,
+.home-manual-entry-button {
   background-color: tomato;
   color: white;
   border: none;
@@ -35,4 +36,5 @@
 
 .home-upload-button {
   margin-top: 20px;
+  margin-right: 20px;
 }
