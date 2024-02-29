@@ -1,3 +1,4 @@
+/* Styles for the container */
 .home-container {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
   z-index: 1;
 }
 
+/* Styles for the search bar */
 .home-search-bar {
   display: flex;
   align-items: center;
@@ -15,26 +17,62 @@
   margin-bottom: 20px;
 }
 
+/* Styles for the search input */
 .home-search-input {
   border-radius: 20px;
-  padding: 15px; /* Increase padding for larger input size */
+  padding: 15px; 
   margin-right: 10px;
-  font-size: 20px; /* Increase font size */
+  font-size: 26px; 
 }
 
-.home-cite-button,
-.home-upload-button,
+/* Styles for the button container */
+.home-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Styles for the Cite button */
+.home-cite-button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px; 
+  cursor: pointer;
+  font-size: 24px; /* Increase font size */
+  margin: 0 10px;
+  width: 150px; 
+  text-align: center; /* Center the text horizontally */
+  line-height: 30px; /* Center the text vertically */
+  white-space: nowrap; 
+  text-decoration: none; /* Add this line to remove underline */
+}
+
+/* Styles for the Upload button and Manual Entry button */
+.home-upload-button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+  cursor: pointer;
+  font-size: 20px; 
+  margin: 20px 10px 0; 
+  width: 150px; 
+  white-space: nowrap;
+  height: 65px; 
+}
+
 .home-manual-entry-button {
   background-color: tomato;
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 15px 30px; /* Increase padding for larger button size */
+  padding: 15px 30px;
   cursor: pointer;
-  font-size: 20px; /* Increase font size */
-}
-
-.home-upload-button {
-  margin-top: 20px;
-  margin-right: 20px;
+  font-size: 20px; 
+  margin: 20px 10px 0; 
+  width: 175px; 
+  white-space: nowrap;
+  height: 65px; 
 }
