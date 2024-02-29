@@ -4,11 +4,12 @@ import { useLocation } from "react-router-dom";
 import "./Citations.css"; // Import Citations.css for styling
 
 const Citations = () => { 
-  const [bookInfo, setBookInfo] = useState(null);
-  const [coverURL, setCoverURL] = useState('');
-  const [citationType, setCitationType] = useState('');
-  const [citationContent, setCitationContent] = useState('');
+  const [bookInfo, setBookInfo] = useState([]);
+  const [coverURLs, setCoverURLs] = useState([]);
+  const [citationTypes, setCitationTypes] = useState([]);
+  const [citationContents, setCitationContents] = useState([]);
   const [copyButtonText, setCopyButtonText] = useState('Copy'); // Track button text
+  const [numInitialResults, setNumInitialResults] = useState(1);
   const location = useLocation();
 
   useEffect(() => {
@@ -19,53 +20,65 @@ const Citations = () => {
       try {
         const response = await axios.get(`https://openlibrary.org/search.json?q=${encodeURIComponent(identifier)}`);
         if (response.data.docs && response.data.docs.length > 0) {
-          setBookInfo(response.data.docs[0]);
-          fetchCover(response.data.docs[0]);
+          setBookInfo(response.data.docs.slice(0, numInitialResults));
+          setCoverURLs([]); // Reset cover URLs
+          response.data.docs.slice(0, numInitialResults).forEach(book => {
+            fetchCover(book);
+          });
+          initializeCitationStates(response.data.docs.slice(0, numInitialResults).length);
         } else {
-          setBookInfo(null);
+          setBookInfo([]);
         }
       } catch (error) {
         console.error('Error fetching book information:', error);
-        setBookInfo(null);
+        setBookInfo([]);
       }
     };
 
     if (identifier) {
       fetchBookInfo();
     }
-  }, [location.search]);
+  }, [location.search, numInitialResults]);
+
+  const initializeCitationStates = (count) => {
+    const initialCitationTypes = Array(count).fill('');
+    const initialCitationContents = Array(count).fill('');
+    setCitationTypes(initialCitationTypes);
+    setCitationContents(initialCitationContents);
+  };
 
   const fetchCover = (book) => {
     if (book && book.cover_i) {
       const coverID = book.cover_i;
       const coverUrl = `https://covers.openlibrary.org/b/id/${coverID}-M.jpg`;
-      setCoverURL(coverUrl);
+      setCoverURLs(prevState => [...prevState, coverUrl]);
     } else {
-      setCoverURL('');
+      setCoverURLs(prevState => [...prevState, '']); // Push empty string if cover not found
     }
   };
 
-  const generateCitation = (type) => {
-    if (bookInfo) {
-      const author = bookInfo.author_name ? bookInfo.author_name.join(', ') : 'N/A';
-      const title = bookInfo.title ? bookInfo.title : 'N/A';
-      const publishYear = bookInfo.first_publish_year ? bookInfo.first_publish_year : 'N/A';
-      const publisher = bookInfo.publisher ? bookInfo.publisher[0] : 'N/A';
-      const city = bookInfo.publish_place ? bookInfo.publish_place[0] : 'N/A';
+  const generateCitation = (type, bookIndex) => {
+    if (bookInfo && bookInfo[bookIndex]) {
+      const book = bookInfo[bookIndex];
+      const author = book.author_name ? book.author_name.join(', ') : 'N/A';
+      const title = book.title ? book.title : 'N/A';
+      const publishYear = book.first_publish_year ? book.first_publish_year : 'N/A';
+      const publisher = book.publisher ? book.publisher[0] : 'N/A';
+      const city = book.publish_place ? book.publish_place[0] : 'N/A';
 
       let citationEntry = '';
 
       switch(type) {
         case 'chicago':
           citationEntry = `${author}. ${title}. ${publishYear}.`;
-          if (bookInfo.isbn) {
-            citationEntry += ` ISBN ${bookInfo.isbn[0]}.`;
+          if (book.isbn) {
+            citationEntry += ` ISBN ${book.isbn[0]}.`;
           }
           if (city !== 'N/A') {
             citationEntry += ` ${city}:`;
           }
-          if (bookInfo.number_of_pages_median) {
-            citationEntry += ` ${bookInfo.number_of_pages_median} pages.`;
+          if (book.number_of_pages_median) {
+            citationEntry += ` ${book.number_of_pages_median} pages.`;
           }
           break;
         case 'apa':
@@ -86,8 +99,13 @@ const Citations = () => {
           citationEntry = '';
       }
 
-      setCitationType(type);
-      setCitationContent(citationEntry);
+      const updatedCitationTypes = [...citationTypes];
+      updatedCitationTypes[bookIndex] = type;
+      setCitationTypes(updatedCitationTypes);
+
+      const updatedCitationContents = [...citationContents];
+      updatedCitationContents[bookIndex] = citationEntry;
+      setCitationContents(updatedCitationContents);
     }
   };
 
@@ -106,6 +124,10 @@ const Citations = () => {
     element.click();
   };
 
+  const handleNumResultsChange = (e) => {
+    setNumInitialResults(parseInt(e.target.value, 10));
+  };
+
   return (
     <div>
       <div className="header-container">
@@ -114,34 +136,43 @@ const Citations = () => {
       </div>
       <div className="citations-container">
         <div className="citations-result-section">
-          {bookInfo && (
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              {coverURL && <img src={coverURL} alt="Book Cover" style={{ marginRight: '20px' }} />}
+          <div className="filter-container">
+            <label htmlFor="num-results">Show:</label>
+            <select id="num-results" value={numInitialResults} onChange={handleNumResultsChange}>
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          {bookInfo && bookInfo.map((book, index) => (
+            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+              {coverURLs[index] && <img src={coverURLs[index]} alt="Book Cover" style={{ marginRight: '20px' }} />}
               <div>
                 <br />
-                <h3>Title: {bookInfo.title}</h3>
-                <p>Alternative Title: {bookInfo.alternative_title ? bookInfo.alternative_title : 'N/A'}</p>
-                <p>Author: {bookInfo.author_name ? bookInfo.author_name.join(', ') : 'N/A'}</p>
-                <p>First Publish Year: {bookInfo.first_publish_year}</p>
-                <p>ISBN: {bookInfo.isbn ? bookInfo.isbn[0] : 'N/A'}</p>
-                <p>Publish Place: {bookInfo.publish_place ? bookInfo.publish_place[0] : 'N/A'}</p>
-                <p>Number of Pages: {bookInfo.number_of_pages_median ? bookInfo.number_of_pages_median : 'N/A'}</p>
-                <button className="chicago-cite-button" onClick={() => generateCitation('chicago')}>Chicago</button>
-                <button className="apa-cite-button" onClick={() => generateCitation('apa')}>APA</button>
-                <button className="mla-cite-button" onClick={() => generateCitation('mla')}>MLA</button>
-                <button className="bibtex-cite-button" onClick={() => generateCitation('bibtex')}>BibTeX</button>
-                {citationType && citationContent && (
+                <h3>Title: {book.title}</h3>
+                <p>Alternative Title: {book.alternative_title ? book.alternative_title : 'N/A'}</p>
+                <p>Author: {book.author_name ? book.author_name.join(', ') : 'N/A'}</p>
+                <p>First Publish Year: {book.first_publish_year}</p>
+                <p>ISBN: {book.isbn ? book.isbn[0] : 'N/A'}</p>
+                <p>Publish Place: {book.publish_place ? book.publish_place[0] : 'N/A'}</p>
+                <p>Number of Pages: {book.number_of_pages_median ? book.number_of_pages_median : 'N/A'}</p>
+                <button className="chicago-cite-button" onClick={() => generateCitation('chicago', index)}>Chicago</button>
+                <button className="apa-cite-button" onClick={() => generateCitation('apa', index)}>APA</button>
+                <button className="mla-cite-button" onClick={() => generateCitation('mla', index)}>MLA</button>
+                <button className="bibtex-cite-button" onClick={() => generateCitation('bibtex', index)}>BibTeX</button>
+                {citationTypes[index] && citationContents[index] && (
                   <div>
                     <br />
-                    <h3>{citationType.toUpperCase()} Citation</h3>
-                    <p>{citationContent}</p>
-                    <button className="copy-button" onClick={() => handleCopy(citationContent)}>{copyButtonText}</button>
-                    <button className="download-button" onClick={() => handleDownload(citationContent, citationType)}>Download</button>
+                    <h3>{citationTypes[index].toUpperCase()} Citation</h3>
+                    <p>{citationContents[index]}</p>
+                    <button className="copy-button" onClick={() => handleCopy(citationContents[index])}>{copyButtonText}</button>
+                    <button className="download-button" onClick={() => handleDownload(citationContents[index], citationTypes[index])}>Download</button>
                   </div>
                 )}
               </div>
             </div>
-          )}
+          ))}
         </div>
       </div>
       <hr />
