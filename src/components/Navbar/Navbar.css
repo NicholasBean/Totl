@@ -46,7 +46,7 @@ nav {
   .menu-list li:last-child a {
     font-weight: 300;
     padding: 5px 10px;
-    background-color: #01aacd;
+    background-color: tomato;
     transition: all 0.5s ease-in-out;
     margin-left: 20px;
     border-radius: 2px;
