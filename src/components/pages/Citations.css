@@ -24,9 +24,12 @@
   top: 0;
   left: 0;
   width: 100%;
+  max-height: calc(100vh - 120px); /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrollbar when content exceeds the height */
   padding: 20px;
   box-sizing: border-box;
 }
+
 
 .citations-other-section {
   padding: 20px;
@@ -111,4 +114,27 @@
   font-size: 14px; /* Smaller font size */
   margin-top: 10px;
   margin-left: 5px;
+}
+
+/* Add styles for the filter container */
+.filter-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Push the container to the right */
+  position: absolute; /* Position the container absolutely */
+  top: 5px; /* Adjust the top position */
+  right: 20px; /* Adjust the right position */
+}
+
+
+/* Adjust styles for the "Show" label */
+.filter-container label {
+  margin-right: 5px; /* Add some space between the label and the dropdown */
+}
+
+/* Adjust styles for the "Show" dropdown */
+.filter-container select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
