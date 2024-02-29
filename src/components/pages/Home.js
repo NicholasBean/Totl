@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import FileContainer from "./links/FileContainer";
+import { FileContainer } from "./links/FileContainer";
 import Manual from "./links/Manual"; 
-//import Citations from "./Citations";
 import "./Home.css";
 
 function Home() {
