@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import "./Citations.css"; // Import Citations.css for styling
+import "./Citations.css";
 
-const Citations = () => { 
+const Citations = () => {
   const [bookInfo, setBookInfo] = useState([]);
   const [coverURLs, setCoverURLs] = useState([]);
   const [citationTypes, setCitationTypes] = useState([]);
   const [citationContents, setCitationContents] = useState([]);
-  const [copyButtonText, setCopyButtonText] = useState('Copy'); // Track button text
+  const [copyButtonText, setCopyButtonText] = useState('Copy');
   const [numInitialResults, setNumInitialResults] = useState(1);
   const location = useLocation();
 
@@ -21,7 +21,7 @@ const Citations = () => {
         const response = await axios.get(`https://openlibrary.org/search.json?q=${encodeURIComponent(identifier)}`);
         if (response.data.docs && response.data.docs.length > 0) {
           setBookInfo(response.data.docs.slice(0, numInitialResults));
-          setCoverURLs([]); // Reset cover URLs
+          setCoverURLs([]);
           response.data.docs.slice(0, numInitialResults).forEach(book => {
             fetchCover(book);
           });
@@ -53,7 +53,7 @@ const Citations = () => {
       const coverUrl = `https://covers.openlibrary.org/b/id/${coverID}-M.jpg`;
       setCoverURLs(prevState => [...prevState, coverUrl]);
     } else {
-      setCoverURLs(prevState => [...prevState, '']); // Push empty string if cover not found
+      setCoverURLs(prevState => [...prevState, '']);
     }
   };
 
@@ -111,15 +111,15 @@ const Citations = () => {
 
   const handleCopy = (citation) => {
     navigator.clipboard.writeText(citation);
-    setCopyButtonText('Copied'); // Change button text to "Copied" when clicked
+    setCopyButtonText('Copied');
   };
 
   const handleDownload = (citation, style) => {
     const element = document.createElement('a');
-    const fileExtension = style === 'bibtex' ? 'bib' : 'txt'; // Set file extension based on citation style
+    const fileExtension = style === 'bibtex' ? 'bib' : 'txt';
     const file = new Blob([citation], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = `${style}_citation.${fileExtension}`; // Set the file extension accordingly
+    element.download = `${style}_citation.${fileExtension}`;
     document.body.appendChild(element);
     element.click();
   };
@@ -131,7 +131,6 @@ const Citations = () => {
   return (
     <div>
       <div className="header-container">
-        {/* Header Content */}
         <h2>Book Information and Citations</h2>
       </div>
       <div className="citations-container">
