@@ -1,0 +1,102 @@
+/* Archives.css */
+
+.header-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin-bottom: 30px;
+    z-index: 1;
+    position: relative;
+    background-color: rgba(207, 196, 196, 0.523);
+    height: 55px;
+  }
+  
+  .header-container h2 {
+    color: white;
+  }
+  
+  .citations-container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .citations-result-section {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 120px); /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrollbar when content exceeds the height */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .citations-other-section {
+    padding: 20px;
+  }
+  
+  /* Style for the Copy and Download buttons */
+  .copy-button,
+  .download-button {
+    background-color: tomato; /* Same color as citation buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px; /* Smaller padding */
+    cursor: pointer;
+    width: auto;
+    text-align: center; /* Center the text horizontally */
+    line-height: 20px;
+    font-size: 14px; /* Smaller font size */
+    margin-top: 10px;
+    margin-right: 10px; /* Add margin between buttons */
+  }
+  
+  /* Specific styles for each citation button */
+  .chicago-cite-button,
+  .apa-cite-button,
+  .mla-cite-button,
+  .bibtex-cite-button {
+    margin-left: 0; /* Adjust margin-left to space out the button */
+    background-color: tomato; /* Same color as citation buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px; /* Smaller padding */
+    cursor: pointer;
+    width: auto;
+    text-align: center; /* Center the text horizontally */
+    line-height: 20px;
+    font-size: 14px; /* Smaller font size */
+    margin-top: 10px;
+  }
+  
+  .apa-cite-button,
+  .mla-cite-button,
+  .bibtex-cite-button {
+    margin-left: 5px; /* Adjust margin-left to space out the button */
+  }
+  
+  /* Add styles for the filter container */
+  .filter-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push the container to the right */
+    position: absolute; /* Position the container absolutely */
+    top: 5px; /* Adjust the top position */
+    right: 20px; /* Adjust the right position */
+  }
+  
+  /* Adjust styles for the "Show" label */
+  .filter-container label {
+    margin-right: 5px; /* Add some space between the label and the dropdown */
+  }
+  
+  /* Adjust styles for the "Show" dropdown */
+  .filter-container select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
