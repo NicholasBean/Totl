@@ -6,7 +6,7 @@ function Contact() {
       <h1>Contact</h1>
     </div>
     <h4>Link to Our GitHub</h4>
-    <a className="github-link" href="https://github.com/SantiagoGuty/Totl/tree/sprint-two">
+    <a className="github-link" href="https://github.com/NicholasBean/Totl/tree/sprint-two">
       <img
         src={"https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"}
         alt="Github Link"
