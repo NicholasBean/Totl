@@ -76,3 +76,25 @@
   white-space: nowrap;
   height: 65px; 
 }
+
+/* Styles for the dropdown */
+.home-dropdown {
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* Style the dropdown options */
+.home-dropdown option {
+  background-color: white; /* Set the background color for options */
+  color: black; /* Set the text color for options */
+}
+
+/* Style the highlighted (selected) option */
+.home-dropdown option:checked {
+  background-color: tomato; /* Set the background color for the selected option */
+  color: white; /* Set the text color for the selected option */
+}
+
+
