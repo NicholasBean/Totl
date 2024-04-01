@@ -71,6 +71,11 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
+        <div className="top-bar">
+          <div className="brand">
+            <span className="totl">TOTL</span><span className="bib">Bib</span>
+          </div>
+        </div>
       <div className="login-form">
         <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
         <form onSubmit={handleSubmit}>
