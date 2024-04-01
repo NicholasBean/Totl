@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-//import axios from "axios";
 import './FileContainer.css';
-
+//import bibtexParse from //find a library/repo
 
 /* UPLOAD THIS INTO THE POSTGRESQL DATABASE 
   
@@ -22,7 +21,24 @@ const Citations = (props) => {
       //we need to parse it 
       //it needs to read book, website or other, 
       //etc
-      JSON.stringify(file)
+      //JSON.stringify(file)
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const BibtexData = e.target.result;
+        const parsedData = bibtexParse.toJSON(BibtexData)
+
+        const jsonData = parsedData.map(entry => ({
+            authfn: entry.entryTags.author.split(" ")[0],
+            authln: entry.entryTags.author.split(" ")[1],
+            title: entry.entryTags.title,
+            type: entry.entryType,
+            year: entry.entryTags.year
+            })).filter(entry => entry.authfn && entry.authln && entry.title && entry.type && entry.year); // Filter out entries with missing fields
+          console.log(jsonData);
+          //setFileDatatoJSON(jsonData);
+        };
+      reader.readAsText(file);
     }
 
     function convertToJson(data) { 
@@ -42,7 +58,7 @@ const Citations = (props) => {
         e.preventDefault()
 
         /* Use fileParser, put into database */
-        console.log(file)
+        //console.log(file)
 
         const data = fileParser(file)
         console.log(data)
