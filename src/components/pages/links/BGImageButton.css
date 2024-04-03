@@ -1,0 +1,28 @@
+button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+  }
+
+  /* Styles for the dropdown */
+.bg-dropdown {
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 12px;
+    margin-right: 10px;
+    border-radius: 40%;
+
+  }
+  
+  /* Style the dropdown options */
+  .bg-dropdown option {
+    background-color: white; /* Set the background color for options */
+    color: black; /* Set the text color for options */
+  }
+  
+  /* Style the highlighted (selected) option */
+  .bg-dropdown option:checked {
+    background-color: tomato; /* Set the background color for the selected option */
+    color: white; /* Set the text color for the selected option */
+  }
