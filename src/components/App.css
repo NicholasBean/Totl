@@ -34,7 +34,6 @@
   z-index: 2;
   flex-direction: column;
   color: #fff;
-
 }
 
 .page-heading h1 {
@@ -44,7 +43,69 @@
   background: rgba(0, 0, 0, 0.5);
   padding: 0px 20px;
   border-radius: 2px;
-  
+}
+
+.citations-container {
+  border-radius: 10px;
+  background-color: white;
+  justify-content: center;
+  z-index: 2;
+  flex-direction: column;
+  padding: 2em;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.citation-item { 
+  padding: 2em;
+  background-color: white;
+  flex-direction: column;
+}
+
+.copy-all-button { 
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+}
+
+.citation-btns {
+  display: flex;
+  padding: 2px;
+  flex-direction: row;
+}
+
+.copy-btn{ 
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 2px;
+}
+
+.edit-btn{ 
+  background-color:darkmagenta;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 2px;
+}
+
+.delete-btn{ 
+  background-color:crimson;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 2px;
 }
 
 @media screen and (max-width: 600px) {
