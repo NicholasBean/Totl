@@ -45,11 +45,12 @@
   border-radius: 2px;
 }
 
-.citations-container {
+.mylib-container {
   border-radius: 10px;
   background-color: white;
   justify-content: center;
   z-index: 2;
+  position: relative;
   flex-direction: column;
   padding: 2em;
   align-self: center;
