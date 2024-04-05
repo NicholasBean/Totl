@@ -7,7 +7,7 @@ function MyLib() {
       <div className="page-heading">
         <h1>MYLib</h1>
       </div>
-      <div className="citations-container">
+      <div className="mylib-container">
       <select>
         <option>Chicago</option>
         <option>MLA</option>
