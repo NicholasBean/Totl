@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./BGImageButton.css"
 
-const BGImageButton = (props) => {
-  //const [bgImg, setBgImg] = useState('');
+const BGImageButton = ({ setBgImg }) => {
 
-  const changeBackgroundImage = () => {
-    const imageList = ["bg.jpg","springbg.jpg","valpochapel.png"] 
-    props.setBgImg(imageList);
-    console.log(imageList);
+  const changeBackgroundImage = (event) => {
+    const selection = event.target.value;
+    console.log(selection);
+    setBgImg(selection)
   };
-  //this needs to be props in App.js I think
 
   return (
-    <div style={{ backgroundImage: `url(./images/${props.bgImg})`}}>
-      <button className="bg-dropdown" onClick={changeBackgroundImage}>Change BG</button>
-    </div>
+    <select className="bg-dropdown" onChange={changeBackgroundImage}>
+      <option value="container">Select Image</option>
+      <option value="container">Bookshelf</option>
+      <option value="spring">Spring Flowers</option>
+      <option value="vu">Chapel</option>
+    </select>
   );
 };
 
