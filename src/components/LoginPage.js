@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
 import './LoginPage.css'; // Import CSS file for styling
 
 const LoginPage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -22,8 +22,8 @@ const LoginPage = () => {
     e.preventDefault();
     // Handle form submission logic here, e.g., validation, API call
     console.log(formData);
-    // Redirect to App component after form submission
-    renderApp();
+    // Navigate to Home component after successful login
+    navigate('/home');
   };
 
   const switchForm = () => {
@@ -52,21 +52,12 @@ const LoginPage = () => {
 
   const handleGoogleCallbackResponse = (response) => {
     if (response.credential) {
-      // Google authentication successful, render App component
-      renderApp();
+      // Google authentication successful, navigate to Home
+      navigate('/home');
     } else {
       // Google authentication failed or cancelled
       console.log('Google Sign-In failed or cancelled.');
     }
-  };
-
-  const renderApp = () => {
-    ReactDOM.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
   };
 
   return (
