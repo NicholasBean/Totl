@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { FileContainer } from "./links/FileContainer";
 import Manual from "./links/Manual";
 import "./Home.css";
+
 
 function Home() {
   const [showCitations, setShowCitations] = useState(false);
   const [showManual, setShowManual] = useState(false);
   const [identifier, setIdentifier] = useState("");
-  const [selectedOption, setSelectedOption] = useState("Archives"); 
+  const [selectedOption, setSelectedOption] = useState("Archives");
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   function handleBackFromCitations() {
     setShowCitations(false);
@@ -24,7 +27,6 @@ function Home() {
   function handleBackFromManual() {
     setShowManual(false);
   }
-
   const handleInputChange = (event) => {
     setIdentifier(event.target.value);
   };
@@ -36,14 +38,24 @@ function Home() {
   const handleCite = () => {
     if (selectedOption === "Archives") {
       // Redirect to citations page with identifier as query parameter
-      window.location.href = `/citations?identifier=${encodeURIComponent(identifier)}`;
+      navigate(`/citations?identifier=${encodeURIComponent(identifier)}`); // Use navigate instead of history.push
     } else {
       console.log("Other options functionality can be implemented here.");
     }
   };
 
+  const handleSignOut = () => {
+    // Redirect to LoginPage
+    navigate("/");
+  };
+
   return (
     <div className="home-container">
+      <div className="home-sign-out-container" onClick={handleSignOut}>
+        <button className="home-sign-out-button">
+          <i className="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
       <div className="home-search-bar">
         <input
           type="text"
