@@ -1,10 +1,11 @@
+// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginPage from './components/LoginPage'; // Assuming your LoginPage component file is located here
+import App from './App'; // Import your App component
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <LoginPage /> {/* Render LoginPage instead of App initially */}
-  </React.StrictMode>
+    <App /> 
+  </React.StrictMode>,
+  document.getElementById('root')
 );
