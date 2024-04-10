@@ -9,6 +9,27 @@
   z-index: 1;
 }
 
+/* Styles for the sign-out button */
+.home-sign-out-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.home-sign-out-button {
+  background-color: transparent;
+  color: tomato;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  transition: color 0.3s; /* Add transition effect for color change */
+}
+
+.home-sign-out-button:hover {
+  color: darkred; /* Change color on hover */
+}
+
 /* Styles for the search bar */
 .home-search-bar {
   display: flex;
@@ -96,5 +117,3 @@
   background-color: tomato; /* Set the background color for the selected option */
   color: white; /* Set the text color for the selected option */
 }
-
-
