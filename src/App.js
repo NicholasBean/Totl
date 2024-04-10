@@ -15,7 +15,7 @@ function App() {
 
   const [bgImg, setBgImg] = useState("container");
   return (
-    <div className="container"> 
+    <div className={bgImg}> 
       <Router>
         <Routes>
           {/* Define login route */}
