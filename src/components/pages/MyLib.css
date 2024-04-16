@@ -1,0 +1,119 @@
+
+.mylib-container {
+    border-radius: 10px;
+    background-color: white;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+    flex-direction: column;
+    padding: 2em;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .mylib-table { 
+    border-radius: 10px;
+    background-color: white;
+    z-index: 2;
+    position: relative;
+    padding: 2em;
+    margin: 2em 20em;
+  }
+  .mylib-table table {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .mylib-table th, .mylib-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom-style: dashed;
+  }
+
+  .citation-item { 
+    width: 100%;
+    padding: 2em;
+    background-color: white;
+    flex-direction: column;
+    border-color: black;
+    border-bottom-style: dashed;
+  }
+
+  .citation-title { 
+    font-style: italic;
+    display: inline;
+  }
+  
+  .copy-all-button { 
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+  }
+  
+  .citation-btns {
+    display: flex;
+    padding: 2px;
+    flex-direction: row;
+  }
+  
+  .copy-btn{ 
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px;
+  }
+  
+  .edit-btn{ 
+    background-color:darkmagenta;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px;
+  }
+  
+  .delete-btn{ 
+    background-color:crimson;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px;
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  /* Styles for the dropdown */
+  .citation-style-select {
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 15px;
+    font-size: 18px;
+  }
+  
+  /* Style the dropdown options */
+  .citation-style-select option {
+    background-color: white; /* Set the background color for options */
+    color: black; /* Set the text color for options */
+  }
+  
+  /* Style the highlighted (selected) option */
+  .citation-style-select option:checked {
+    background-color: tomato; /* Set the background color for the selected option */
+    color: white; /* Set the text color for the selected option */
+  }
