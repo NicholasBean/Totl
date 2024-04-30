@@ -1,38 +1,31 @@
 import React from "react";
 
-const MylibCitation = (props) => {
-  // Function to generate citation content based on citation style
-  const generateCitationContent = () => {
-    // Switch statement to generate citation content based on citation style
-    switch (props.citationStyle) {
-      case "chicago":
-        // Return Chicago style citation content
-        return `${props.author}. ${props.title}. ${props.year}. ${props.publisher}`;
-      case "mla":
-        // Return MLA style citation content
-        return `${props.author}. *${props.title}*. ${props.location}, ${props.year}.`;
-      case "apa":
-        // Return APA style citation content
-        return `${props.author} (${props.year}). ${props.title}. ${props.location}: ${props.publisher}.`;
-      case "bibtex":
-        // Return BibTeX style citation content
-        return `@book{key,
-  author = {${props.author}},
-  title = {${props.title}},
-  publisher = {${props.publisher}},
-  year = {${props.year}},
-}`;
-      default:
-        return "";
-    }
+const MylibCitation = ({ content }) => {
+  const handleCopy = (citation) => {
+    navigator.clipboard.writeText(citation);
   };
+
+  // Function to format the citation content with italic titles
+  const formatCitationContent = (content) => {
+    // Regular expression to match the book titles
+    const titleRegex = /<i>(.*?)<\/i>/g;
+    // Replace book titles with italic formatting
+    const formattedContent = content.replace(
+      titleRegex,
+      (match, title) => `<i>${title}</i>`
+    );
+    return formattedContent;
+  };
+
+  // Format the citation content before rendering
+  const formattedContent = formatCitationContent(content);
 
   return (
     <div className="citation-item">
-      {/* Render citation content based on citation style */}
-      <div className="citation-info">{generateCitationContent()}</div>
+      {/* Render formatted citation content */}
+      <div className="citation-info" dangerouslySetInnerHTML={{ __html: formattedContent }} />
       <div className="citation-btns">
-        <button className="copy-btn">Copy Item</button>
+        <button className="copy-btn" onClick={() => handleCopy(content)}>Copy Item</button>
         <button className="delete-btn">Delete</button>
         <button className="edit-btn">Edit</button>
       </div>
