@@ -3,9 +3,8 @@ import MylibCitation from "./links/MylibCitation";
 import './MyLib.css';
 
 function MyLib() {
-  const [citationTypes, setCitationTypes] = useState([]);
-  const [citationContents, setCitationContents] = useState([]);
   const [selectedCitationStyle, setSelectedCitationStyle] = useState("chicago");
+  const [citationContents, setCitationContents] = useState([]);
 
   const bookInfo = [
     {
@@ -27,20 +26,9 @@ function MyLib() {
   ];
 
   useEffect(() => {
-    // Generate citations for all books initially
-    const updatedCitationTypes = bookInfo.map(() => selectedCitationStyle);
-    const updatedCitationContents = bookInfo.map((book) => generateCitationContent(selectedCitationStyle, book));
-    setCitationTypes(updatedCitationTypes);
+    const updatedCitationContents = bookInfo.map(book => generateCitationContent(selectedCitationStyle, book));
     setCitationContents(updatedCitationContents);
   }, [selectedCitationStyle, bookInfo]);
-
-  const generateCitation = (type) => {
-    // Generate citations for all books when the citation style is changed
-    const updatedCitationTypes = bookInfo.map(() => type);
-    const updatedCitationContents = bookInfo.map((book) => generateCitationContent(type, book));
-    setCitationTypes(updatedCitationTypes);
-    setCitationContents(updatedCitationContents);
-  };
 
   const generateCitationContent = (type, book) => {
     const author = book.author;
@@ -49,40 +37,38 @@ function MyLib() {
     const city = book.city;
     const pages = book.pages;
     let citationEntry = "";
-
+  
     switch (type) {
       case "chicago":
-        citationEntry = `${author}. ${title}. ${publishYear}. ${city}`;
-        if (book.isbn) {
-          citationEntry += ` ISBN ${book.isbn}.`;
-        }
+        citationEntry = `${author}. <span class="italic">${title}</span>. ${publishYear}. `;
         if (city !== "N/A") {
           citationEntry += ` ${city}:`;
         }
         if (pages) {
-          citationEntry += ` ${pages} pages.`;
+          citationEntry += ` ${pages}.`;
         }
         break;
       case "apa":
-        citationEntry = `${author} (${publishYear}). ${title}. ${city}.`;
+        citationEntry = `${author} (${publishYear}). <span class="italic">${title}</span>. ${city}.`;
         break;
       case "mla":
-        citationEntry = `${author}. *${title}*. ${city}, ${publishYear}.`;
+        citationEntry = `${author}. <span class="italic">${title}</span>. ${city}, ${publishYear}.`;
         break;
       case "bibtex":
         citationEntry = `@book{key,
-    author = {${author}},
-    title = {${title}},
-    publisher = {${city}},
-    year = {${publishYear}},
-}`;
+      author = {${author}},
+      title = {${title}},
+      publisher = {${city}},
+      year = {${publishYear}},
+  }`;
         break;
       default:
         citationEntry = "";
     }
-
+  
     return citationEntry;
   };
+  
 
   return (
     <div className="Mylib-page">
@@ -124,13 +110,7 @@ function MyLib() {
           {citationContents.map((content, index) => (
             <div key={index}>
               <MylibCitation
-                author={bookInfo[index].author}
-                title={bookInfo[index].title}
-                year={bookInfo[index].publishYear}
-                isbn={bookInfo[index].isbn}
-                location={bookInfo[index].city}
-                pages={bookInfo[index].pages}
-                citationStyle={citationTypes[index]} // Pass citation style from state
+                key={index} // Adding key prop
                 content={content} // Pass citation content
               />
             </div>
