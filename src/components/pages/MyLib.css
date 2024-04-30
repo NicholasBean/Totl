@@ -1,3 +1,9 @@
+.Mylib-page { 
+  overflow-y: auto; /* Enable vertical scrollbar when content exceeds the height */
+  z-index: 10;
+  max-height: calc(110vh - 120px); /* Adjust the height as needed */
+  position: absolute;
+}
 
 .mylib-container {
     border-radius: 10px;
@@ -32,7 +38,7 @@
   }
   .mylib-table th, .mylib-table td {
     text-align: left;
-    padding: 10px;
+    padding: .6em;
     border-bottom-style: dashed;
   }
 
@@ -117,3 +123,18 @@
     background-color: tomato; /* Set the background color for the selected option */
     color: white; /* Set the text color for the selected option */
   }
+
+  @media screen and (max-width: 600px) {
+    .mylib-table {
+      border-radius: 10px;
+      background-color: white;
+      z-index: 2;
+      position: relative;
+      margin: 5em 2em;
+    }
+  }
+
+  .italic {
+    font-style: italic;
+  }
+  
