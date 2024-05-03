@@ -7,6 +7,7 @@ import Contact from './components/pages/Contact';
 import LoginPage from './components/pages/LoginPage';
 import BGImageButton from './components/pages/links/BGImageButton';
 import { useState } from 'react';
+import databaseDemo from './components/pages/inputDBdemo';
 
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
