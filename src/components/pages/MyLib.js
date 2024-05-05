@@ -72,113 +72,113 @@ function MyLib() {
   const textToUnicodeItalics = (text) => {
     const italicMap = {
       // Lowercase letters
-      a: '𝑎',
-      b: '𝑏',
-      c: '𝑐',
-      d: '𝑑',
-      e: '𝑒',
-      f: '𝑓',
-      g: '𝑔',
-      h: 'ℎ',
-      i: '𝑖',
-      j: '𝑗',
-      k: '𝑘',
-      l: '𝑙',
-      m: '𝑚',
-      n: '𝑛',
-      o: '𝑜',
-      p: '𝑝',
-      q: '𝑞',
-      r: '𝑟',
-      s: '𝑠',
-      t: '𝑡',
-      u: '𝑢',
-      v: '𝑣',
-      w: '𝑤',
-      x: '𝑥',
-      y: '𝑦',
-      z: '𝑧',
+      a: 'ð‘Ž',
+      b: 'ð‘',
+      c: 'ð‘',
+      d: 'ð‘‘',
+      e: 'ð‘’',
+      f: 'ð‘“',
+      g: 'ð‘”',
+      h: 'â„Ž',
+      i: 'ð‘–',
+      j: 'ð‘—',
+      k: 'ð‘˜',
+      l: 'ð‘™',
+      m: 'ð‘š',
+      n: 'ð‘›',
+      o: 'ð‘œ',
+      p: 'ð‘',
+      q: 'ð‘ž',
+      r: 'ð‘Ÿ',
+      s: 'ð‘ ',
+      t: 'ð‘¡',
+      u: 'ð‘¢',
+      v: 'ð‘£',
+      w: 'ð‘¤',
+      x: 'ð‘¥',
+      y: 'ð‘¦',
+      z: 'ð‘§',
       // Uppercase letters
-      A: '𝐴',
-      B: '𝐵',
-      C: '𝐶',
-      D: '𝐷',
-      E: '𝐸',
-      F: '𝐹',
-      G: '𝐺',
-      H: '𝐻',
-      I: '𝐼',
-      J: '𝐽',
-      K: '𝐾',
-      L: '𝐿',
-      M: '𝑀',
-      N: '𝑁',
-      O: '𝑂',
-      P: '𝑃',
-      Q: '𝑄',
-      R: '𝑅',
-      S: '𝑆',
-      T: '𝑇',
-      U: '𝑈',
-      V: '𝑉',
-      W: '𝑊',
-      X: '𝑋',
-      Y: '𝑌',
-      Z: '𝑍',
+      A: 'ð´',
+      B: 'ðµ',
+      C: 'ð¶',
+      D: 'ð·',
+      E: 'ð¸',
+      F: 'ð¹',
+      G: 'ðº',
+      H: 'ð»',
+      I: 'ð¼',
+      J: 'ð½',
+      K: 'ð¾',
+      L: 'ð¿',
+      M: 'ð‘€',
+      N: 'ð‘',
+      O: 'ð‘‚',
+      P: 'ð‘ƒ',
+      Q: 'ð‘„',
+      R: 'ð‘…',
+      S: 'ð‘†',
+      T: 'ð‘‡',
+      U: 'ð‘ˆ',
+      V: 'ð‘‰',
+      W: 'ð‘Š',
+      X: 'ð‘‹',
+      Y: 'ð‘Œ',
+      Z: 'ð‘',
       // Common diacritics (lowercase)
-      'à': '𝑎̀',
-      'á': '𝑎́',
-      'â': '𝑎̂',
-      'ä': '𝑎̈',
-      'å': '𝑎̊',
-      'ç': '𝑐̧',
-      'è': '𝑒̀',
-      'é': '𝑒́',
-      'ê': '𝑒̂',
-      'ë': '𝑒̈',
-      'ì': '𝑖̀',
-      'í': '𝑖́',
-      'î': '𝑖̂',
-      'ï': '𝑖̈',
-      'ñ': '𝑛̃',
-      'ò': '𝑜̀',
-      'ó': '𝑜́',
-      'ô': '𝑜̂',
-      'ö': '𝑜̈',
-      'ø': '𝑜̊',
-      'ù': '𝑢̀',
-      'ú': '𝑢́',
-      'û': '𝑢̂',
-      'ü': '𝑢̈',
-      'ý': '𝑦́',
-      'ÿ': '𝑦̈',
+      'Ã ': 'ð‘ŽÌ€',
+      'Ã¡': 'ð‘ŽÌ',
+      'Ã¢': 'ð‘ŽÌ‚',
+      'Ã¤': 'ð‘ŽÌˆ',
+      'Ã¥': 'ð‘ŽÌŠ',
+      'Ã§': 'ð‘Ì§',
+      'Ã¨': 'ð‘’Ì€',
+      'Ã©': 'ð‘’Ì',
+      'Ãª': 'ð‘’Ì‚',
+      'Ã«': 'ð‘’Ìˆ',
+      'Ã¬': 'ð‘–Ì€',
+      'Ã­': 'ð‘–Ì',
+      'Ã®': 'ð‘–Ì‚',
+      'Ã¯': 'ð‘–Ìˆ',
+      'Ã±': 'ð‘›Ìƒ',
+      'Ã²': 'ð‘œÌ€',
+      'Ã³': 'ð‘œÌ',
+      'Ã´': 'ð‘œÌ‚',
+      'Ã¶': 'ð‘œÌˆ',
+      'Ã¸': 'ð‘œÌŠ',
+      'Ã¹': 'ð‘¢Ì€',
+      'Ãº': 'ð‘¢Ì',
+      'Ã»': 'ð‘¢Ì‚',
+      'Ã¼': 'ð‘¢Ìˆ',
+      'Ã½': 'ð‘¦Ì',
+      'Ã¿': 'ð‘¦Ìˆ',
       // Common diacritics (uppercase)
-      'À': '𝐴̀',
-      'Á': '𝐴́',
-      'Â': '𝐴̂',
-      'Ä': '𝐴̈',
-      'Å': '𝐴̊',
-      'Ç': '𝐶̧',
-      'È': '𝐸̀',
-      'É': '𝐸́',
-      'Ê': '𝐸̂',
-      'Ë': '𝐸̈',
-      'Ì': '𝐼̀',
-      'Í': '𝐼́',
-      'Î': '𝐼̂',
-      'Ï': '𝐼̈',
-      'Ñ': '𝑁̃',
-      'Ò': '𝑂̀',
-      'Ó': '𝑂́',
-      'Ô': '𝑂̂',
-      'Ö': '𝑂̈',
-      'Ø': '𝑂̊',
-      'Ù': '𝑈̀',
-      'Ú': '𝑈́',
-      'Û': '𝑈̂',
-      'Ü': '𝑈̈',
-      'Ý': '𝑌́',
-      'Ÿ': '𝑌̈',
+      'Ã€': 'ð´Ì€',
+      'Ã': 'ð´Ì',
+      'Ã‚': 'ð´Ì‚',
+      'Ã„': 'ð´Ìˆ',
+      'Ã…': 'ð´ÌŠ',
+      'Ã‡': 'ð¶Ì§',
+      'Ãˆ': 'ð¸Ì€',
+      'Ã‰': 'ð¸Ì',
+      'ÃŠ': 'ð¸Ì‚',
+      'Ã‹': 'ð¸Ìˆ',
+      'ÃŒ': 'ð¼Ì€',
+      'Ã': 'ð¼Ì',
+      'ÃŽ': 'ð¼Ì‚',
+      'Ã': 'ð¼Ìˆ',
+      'Ã‘': 'ð‘Ìƒ',
+      'Ã’': 'ð‘‚Ì€',
+      'Ã“': 'ð‘‚Ì',
+      'Ã”': 'ð‘‚Ì‚',
+      'Ã–': 'ð‘‚Ìˆ',
+      'Ã˜': 'ð‘‚ÌŠ',
+      'Ã™': 'ð‘ˆÌ€',
+      'Ãš': 'ð‘ˆÌ',
+      'Ã›': 'ð‘ˆÌ‚',
+      'Ãœ': 'ð‘ˆÌˆ',
+      'Ã': 'ð‘ŒÌ',
+      'Å¸': 'ð‘ŒÌˆ',
       // Add more characters as needed
     };  
   
@@ -210,15 +210,43 @@ function MyLib() {
     });
   };
   
-  const handleCopyAll = (citationContents) => {
-    // Combine all citation contents into a single string
-    const combinedCitation = citationContents.join("\n");
-    // Format the citation content with italic tags before copying
-    const formattedCitation = formatCitationContent(combinedCitation);
-    // Replace HTML <span> elements with Unicode italics
-    const unicodeCitation = replaceHtmlWithUnicode(formattedCitation);
-    navigator.clipboard.writeText(unicodeCitation);
-  };
+const handleCopyAll = (citationContents) => {
+  const combinedCitation = citationContents.join("\n");
+  const formattedCitation = formatCitationContent(combinedCitation);
+  const unicodeCitation = replaceHtmlWithUnicode(formattedCitation);
+
+  // Attempt to copy to clipboard using navigator.clipboard
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(unicodeCitation)
+      .then(() => {
+        console.log("Bibliography copied successfully!");
+      })
+      .catch((error) => {
+        console.error("Unable to copy bibliography using navigator.clipboard: ", error);
+        // If copying fails, fall back to manual copy
+        handleCopyFallback(unicodeCitation);
+      });
+  } else {
+    // If navigator.clipboard is not available, fall back to manual copy
+    handleCopyFallback(unicodeCitation);
+  }
+};
+
+const handleCopyFallback = (text) => {
+  // Display the text in a textarea for manual copy
+  // Navigator.clipboard doesn't work for all systems. 
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  if (document.execCommand('copy')) {
+    console.log('Text copied to clipboard');
+  } else {
+    console.error('Unable to copy text to clipboard');
+  }
+  document.body.removeChild(textarea);
+};
+
 
   return (
     <div className="Mylib-page">
