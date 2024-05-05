@@ -114,21 +114,50 @@ const MylibCitation = ({ content }) => {
       'Ÿ': '𝑌̈',
       // Add more characters as needed
     };  
-  
-    // Replace each character with its Unicode italic counterpart
-    return text.replace(/\D/g, (char) => {
-      // Check if the character has an italic counterpart in the map
-      return italicMap[char] || char;
-    });
-  };
+
+  // Replace each character with its Unicode italic counterpart
+  return text.replace(/[a-zA-ZÀ-ÿ]/g, (char) => {
+    // Check if the character has an italic counterpart in the map
+    return italicMap[char] || char;
+  });
+};
+
   
   const handleCopy = (citation) => {
-    // Format the citation content with italic tags before copying
     const formattedCitation = formatCitationContent(citation);
-    // Replace HTML <span> elements with Unicode italics
     const unicodeCitation = replaceHtmlWithUnicode(formattedCitation);
-    navigator.clipboard.writeText(unicodeCitation);
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(unicodeCitation)
+        .then(() => {
+          console.log("Bibliography copied successfully!");
+        })
+        .catch((error) => {
+          console.error("Unable to copy bibliography using navigator.clipboard: ", error);
+          // If copying fails, fall back to manual copy
+          handleCopyFallback(unicodeCitation);
+        });
+    } else {
+      // If navigator.clipboard is not available, fall back to manual copy
+      handleCopyFallback(unicodeCitation);
+    }
   };
+  
+  const handleCopyFallback = (text) => {
+    // Display the text in a textarea for manual copy
+    // Navigator.clipboard doesn't work for all systems. 
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    if (document.execCommand('copy')) {
+      console.log('Text copied to clipboard');
+    } else {
+      console.error('Unable to copy text to clipboard');
+    }
+    document.body.removeChild(textarea);
+  };
+
 
   const handleEdit = (citation) => {
     console.log("edit clicked");
