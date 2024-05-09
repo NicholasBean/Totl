@@ -1,0 +1,11 @@
+
+h1 {
+	text-align: center;
+	color: tomato;
+}
+#InputAuthorsDiv {
+	top: 40%;
+	left: 40%;
+	z-index: 1;
+	position: absolute;
+}
