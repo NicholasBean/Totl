@@ -7,7 +7,10 @@ import Contact from './components/pages/Contact';
 import LoginPage from './components/pages/LoginPage';
 import BGImageButton from './components/pages/links/BGImageButton';
 import { useState } from 'react';
-import databaseDemo from './components/pages/inputDBdemo';
+
+// Componenet imports
+import InputAuthors from "./components/pages/InputAuthors";
+import ShowAuthors from "./components/pages/ShowAuthors";
 
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -34,6 +37,8 @@ function App() {
                   <Route path="/mylib" element={<MyLib />} />
                   <Route path="/citations" element={<Citations />} /> 
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="/InputAuthors" element={<InputAuthors />} />
+                  <Route path="/ShowAuthors" element={<ShowAuthors />} />
                 </Routes>
               </>
             }
