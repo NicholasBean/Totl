@@ -15,5 +15,13 @@ export const MenuList = [
       title: "Contact",
       url: "/contact",
     },
+    {
+    	title: "InputAuthors",
+    	url: "/InputAuthors",
+    },
+    {
+    	title: "ShowAuthors",
+    	url: "/ShowAuthors",
+    },
   ];
   
